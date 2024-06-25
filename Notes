@@ -1,0 +1,22 @@
+1. Emmet:
+   Plug in for many popular text editors which improves html and css workflow.
+
+2. Diff b/w Framework &7 Library
+    A library is a collection of prewritten code that can be used to simplify tasks.
+    Framework includes reusable pieces of code written to perform common tasks and uses code provided by a developer for custom functionality.
+3. CDN:
+    Content Delivery network is network of interconnected servers which speeds up loading webpages for data heavy applications.
+4. React:
+    React is js library. React name is given as it allow developers to react and to change state and data within an application to update User interface.
+5. CrossOrigin:
+    It enable CORS(Cross origin resource sharing). It is HTTP feature which allows webapplication running under 1 domain to access resource from other domain.
+6. React and ReactDom:
+     React is JS library which powers the component based architecture and handles logic.
+     Reactdom is the package which updates the changes of those components to browser DOM.
+7. React.development.js and react.production.js via CDN
+    React.development.js uses some bundle package which allows HMR and error handling to show debug easily while development.
+    React.production.js uses some bundle package which compress and remodify our code in efficient way and increase speed use for application user.
+
+8. Npm - Not abbreviated as Node package manager. All packages are maintained in this.
+9. Parcel/Webpack - both are one of the bundlers which helps for react. Parcel has more prominent feautures which helps app run faster.
+10. Parcel-cache - parcel-cache is created after executing parcel through npx. This will cache the code and builds server in faster timing after each changes saved.
