@@ -1,3 +1,69 @@
-#heading{
-    color: red;
+body{
+    box-sizing: border-box;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: burlywood;
+    border-bottom: 1px solid black;
+}
+
+.logo{
+    width: 100px;
+    text-align: center;
+}
+
+.nav-items > ul {
+  display : flex;
+  font-size: 25px;
+}
+
+.nav-items > ul > li{
+    padding: 10px;
+    margin: 10px;
+    list-style-type: none;
+  }
+
+  .searchBox{
+    margin: 20px;
+  }
+
+
+ .res-container{
+    display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+ }
+
+ .card-detail{
+    width: 260px;
+    margin: 10px auto;
+ }
+
+.card-detail:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+  .card-detail figure{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px 2px #fff;
+    margin: 5px;
+
+}
+.card-detail figure img{
+    width: 250px;
+    border-radius: 8px;
+    height: 200px;
+}
+
+.card-detail figure h2{
+    margin: 0px;
+}
+.card-detail figcaption{
+    text-align: left !important;
+    padding: 5px;
+}
+
