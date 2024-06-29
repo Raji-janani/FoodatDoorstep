@@ -2010,15 +2010,16 @@ const resList = [
 
 const RestaurantCards = (props)=> {
    const {resData} = props;
+   const {name, avgRating, cuisines, costForTwo } = resData?.info
     return(
        <div class="card-detail">
            <figure>
               <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + resData.info.cloudinaryImageId} alt=""/>
                 <figcaption>
-                    <h2 className="res-name">{resData.info.name}</h2>
-                     <div className="rating">{resData.info.avgRating}</div>
-                    <div className="cuisine">{resData.info.cuisines.join(", ")}</div> 
-                    <div>{resData.info.costForTwo}</div>
+                    <h2 className="res-name">{name}</h2>
+                     <div className="rating">{avgRating}</div>
+                    <div className="cuisine">{cuisines.join(", ")}</div> 
+                    <div>{costForTwo}</div>
                 </figcaption>
          </figure>
         </div>
@@ -2034,14 +2035,11 @@ const Body = () =>{
                 {/* <input type="text">Search</input> */}
             </div>
             <div className="res-container">
-                    <RestaurantCards  resData = {resList[0]} />
-                    <RestaurantCards resData = {resList[1]} />
-                    <RestaurantCards resData = {resList[2]} />
-                    <RestaurantCards resData = {resList[3]} />
-                    <RestaurantCards resData = {resList[4]} />
-                    <RestaurantCards resData = {resList[5]} />
-                    <RestaurantCards resData = {resList[6]} />
-                    <RestaurantCards resData = {resList[7]} />
+                   {
+                    resList.map((restaurant) =>{
+                      return <RestaurantCards resData= {restaurant}/>
+                    })
+                   }
             </div>
         </div>
     )
