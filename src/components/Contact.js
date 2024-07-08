@@ -1,8 +1,12 @@
+import UserClass from "./UserClass";
+
 const Contact= ()=>{
     return (
         <div>
-        <h1>this is contact page</h1>
-        <h2>Thanks for contacting us</h2>
+        <h2>this is contact page</h2>
+        <h3>Thanks for contacting us</h3>
+        <h4>For further query</h4>
+        <UserClass />
         </div>
     )
 }

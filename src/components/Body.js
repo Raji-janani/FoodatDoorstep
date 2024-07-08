@@ -2,6 +2,7 @@ import RestaurantCards from "./RestaurantCards";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const Body = () =>{
@@ -20,6 +21,14 @@ const json = await data.json();
 setListofres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 setFilteredres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
+
+const onlineStatus = useOnlineStatus();
+
+if (onlineStatus === false){
+    return(
+        <h2>Your internet connection is low. Please check your internet!!</h2>
+    )
+}
 
 
     return listofres.length === 0 ? ( 
