@@ -27,8 +27,10 @@ body{
 
   .searchBox, .res-filter{
     margin: 20px;
+    border: 0 0 0 10px
   }
 
+  
 
  .res-container{
     display: flex;
@@ -90,4 +92,10 @@ body{
 
 .filters{
   display: flex;
+}
+
+.menuItems{
+  border: 1px solid black;
+  margin: 10px auto;
+  padding: 0px 20px;
 }

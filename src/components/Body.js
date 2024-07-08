@@ -1,10 +1,11 @@
 import RestaurantCards from "./RestaurantCards";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 
 const Body = () =>{
-    const [Listofres, setListofres] = useState([]);
+    const [listofres, setListofres] = useState([]);
     const [filteredres , setFilteredres] = useState([]);
     const [searchtxt , setSearchtxt] = useState("");
 
@@ -21,9 +22,11 @@ setFilteredres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.res
 };
 
 
-    return Listofres.length === 0 ? <Shimmer/> :(
+    return listofres.length === 0 ? ( 
+    <Shimmer/> 
+):(
         <div className="bodyContent">
-
+               
           <div className="filters">  
                 <div className="searchBox">
                     <input type="text" className="searchbox" 
@@ -33,7 +36,7 @@ setFilteredres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.res
                     }
                 } /> 
                     <button className="filter-btn" onClick={()=>{
-                    const filteredres =  Listofres.filter((res)=> {
+                    const filteredres =  listofres.filter((res)=> {
                         return res.info.name.toLowerCase().includes(searchtxt.toLowerCase())
                     }
                        );
@@ -42,7 +45,7 @@ setFilteredres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.res
                 </div>
                 <div className="res-filter">
                     <button className="toprated-btn" onClick={()=>{
-                const filteredList = Listofres.filter(
+                const filteredList = listofres.filter(
                         (res) => res.info.avgRating > 4.5
                         );
                         setFilteredres(filteredList);
@@ -52,12 +55,15 @@ setFilteredres(json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.res
             <div className="res-container">
                    {
                     filteredres.map((restaurant) =>{
-                      return <RestaurantCards key={restaurant.info.id} resData= {restaurant}/>
+                      return (
+                      <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id} ><RestaurantCards  resData= {restaurant}/></Link>
+                      )
                     })
                    }
             </div>
         </div>
     );
+
 };
 
 export default Body;
