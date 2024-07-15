@@ -1,4 +1,4 @@
-import RestaurantCards from "./RestaurantCards";
+import RestaurantCards,{withOfferLabel}  from "./RestaurantCards";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -9,6 +9,10 @@ const Body = () =>{
     const [listofres, setListofres] = useState([]);
     const [filteredres , setFilteredres] = useState([]);
     const [searchtxt , setSearchtxt] = useState("");
+     
+
+
+    const RestaurantCardOffers = withOfferLabel(RestaurantCards);
 
     useEffect(()=>{
     fetchData();
@@ -36,24 +40,26 @@ if (onlineStatus === false){
 ):(
         <div className="bodyContent">
                
-          <div className="filters">  
-                <div className="searchBox">
-                    <input type="text" className="searchbox" 
+          <div className="flex">  
+                <div className="m-3 px-4">
+                    <input type="text" className="border border-black" 
                     value={searchtxt} 
                     onChange={(e)=>{
                         setSearchtxt(e.target.value);
                     }
                 } /> 
-                    <button className="filter-btn" onClick={()=>{
+              
+                    <button className="bg-gray-200 hover:bg-gray-400 border px-4 m-4 py-1 rounded-md" onClick={()=>{
                     const filteredres =  listofres.filter((res)=> {
                         return res.info.name.toLowerCase().includes(searchtxt.toLowerCase())
                     }
                        );
                        setFilteredres(filteredres);
                     }}>Search</button>
+                  
                 </div>
-                <div className="res-filter">
-                    <button className="toprated-btn" onClick={()=>{
+                <div className="m-3 px-4">
+                    <button className="bg-gray-200 hover:bg-gray-400 border px-4 m-4 py-1 rounded-md" onClick={()=>{
                 const filteredList = listofres.filter(
                         (res) => res.info.avgRating > 4.5
                         );
@@ -61,15 +67,29 @@ if (onlineStatus === false){
                     }}>Top Rated Restaurant</button>
                 </div>
          </div>
-            <div className="res-container">
-                   {
-                    filteredres.map((restaurant) =>{
-                      return (
-                      <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id} ><RestaurantCards  resData= {restaurant}/></Link>
+         
+                <div className="m-2 lg:mx-2 p-2 flex flex-wrap space-x-4 content-start bg-gray-50">
+                    {
+                        filteredres.map((restaurant) =>{
+                        return (
+                        <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id} >
+                            
+                    {
+                            restaurant?.info?.avgRating > 4.2 ? (
+                                <RestaurantCardOffers resData= {restaurant}/>
+                                
+                            ):
+                          (
+                            <RestaurantCards  resData= {restaurant}/>   
                       )
-                    })
-                   }
-            </div>
+                    }
+                            
+                           </Link>
+                        )
+                        })
+                    }
+                </div>
+          
         </div>
     );
 

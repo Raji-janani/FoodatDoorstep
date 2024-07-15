@@ -1,8 +1,12 @@
 import useRestaurantMenu from "../utils/useRestaurantMenu"
+import RestaurantCategory from "./RestaurantCategory";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const RestaurantMenu = () =>{
+
+    const [showIndex, setShowIndex] = useState(1);
 
      const {resId} = useParams();
     
@@ -15,27 +19,29 @@ if (resInfo === null){ return (
 
 const { name, cuisines, costForTwoMessage} = resInfo?.cards[2]?.card?.card?.info
 
-const { itemCards} = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+const categories =
+resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+  (c) =>
+    c.card?.card?.["@type"] ===
+    "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+);
 
       return (
-        <div className="menu">
-            <h1>{name}</h1>
-            <h3>{cuisines.join(", ")}</h3>
-            <p>{costForTwoMessage}</p>
+        <div className="border-black p-4 m-4 ">
+            <h1 className="font-bold text-xl w-6/12 mx-auto">{name}</h1>
            
-                <h3>Recommended Menu</h3>
-                <ul>
-                    {itemCards.map( (items) => (
-                    <div key={items.card.info.id} className="menuItems">
-                        <p>{items.card.info.name}</p>
-                        <p>Price - Rs.{items.card.info.price/100}</p>
-                       <p>{items.card.info.description}</p>
-                    </div>
-                    
-                )
-                )}
-               </ul>
-          
+            <h3 className="w-6/12 mx-auto">{cuisines.join(", ")}</h3>
+            <p className="w-6/12 mx-auto">{costForTwoMessage}</p>
+           
+             {categories.map((category, index) => (
+                <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card}
+                 showItems={index === showIndex ? true : false}
+                 setShowIndex = {()=>(setShowIndex(index))}
+                />
+             )
+
+             )}
+
         </div>
     )
 }
