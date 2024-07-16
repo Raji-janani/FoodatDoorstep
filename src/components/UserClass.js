@@ -1,5 +1,6 @@
 
 import React from "react"
+import UserContext from "./UserContext";
 
 class UserClass extends React.Component{
 
@@ -17,7 +18,6 @@ constructor(props){
 async componentDidMount(){
     const data = await fetch("https://api.github.com/users/Raji-janani")
     const json = await data.json();
-    console.log(json);
     this.setState({
         userInfo : json
     })
@@ -32,6 +32,9 @@ async componentDidMount(){
         return(
            <div className="user-card">
             <h2>name: {this.state.userInfo.name}</h2>
+            <UserContext.Consumer>
+                {({loggedinUser})=> <h2>{loggedinUser}</h2>}
+            </UserContext.Consumer>
             <h3>location: {this.state.userInfo.location}</h3>
            </div>
         )

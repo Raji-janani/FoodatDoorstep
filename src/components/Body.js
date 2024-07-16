@@ -1,16 +1,14 @@
 import RestaurantCards,{withOfferLabel}  from "./RestaurantCards";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
+import UserContext from "./UserContext";
 
 const Body = () =>{
     const [listofres, setListofres] = useState([]);
     const [filteredres , setFilteredres] = useState([]);
     const [searchtxt , setSearchtxt] = useState("");
-     
-
 
     const RestaurantCardOffers = withOfferLabel(RestaurantCards);
 
@@ -34,6 +32,7 @@ if (onlineStatus === false){
     )
 }
 
+const { loggedinUser, setUserName } = useContext(UserContext);
 
     return listofres.length === 0 ? ( 
     <Shimmer/> 
@@ -66,9 +65,16 @@ if (onlineStatus === false){
                         setFilteredres(filteredList);
                     }}>Top Rated Restaurant</button>
                 </div>
+                <div className="m-4 px-4 py-1">
+                   <span>UserName: </span>
+                    <input className="m-2 px-4 border border-black" value={loggedinUser} onChange={(e)=>{
+                   setUserName(e.target.value)
+                    }} />
+                </div>
          </div>
          
-                <div className="m-2 lg:mx-2 p-2 flex flex-wrap space-x-4 content-start bg-gray-50">
+                <div className="m-0 p-2 bg-gray-50">
+                   <div className="flex flex-wrap space-x-4 lg:w-11/12 mx-auto p-2">
                     {
                         filteredres.map((restaurant) =>{
                         return (
@@ -90,6 +96,7 @@ if (onlineStatus === false){
                     }
                 </div>
           
+        </div>
         </div>
     );
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,18 +8,32 @@ import Contact from "./components/Contact";
 import Errorpage from "./components/Errorpage";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy, Suspense } from "react";
-
+import UserContext from "./components/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(()=> import("./components/Grocery"))
 
-
-
 const AppLayout = () =>{
+  const[username, setUserName]= useState("")
+
+useEffect(()=>{
+// api call to get data
+const data = {
+  user: "Raji"
+}
+setUserName(data.user)
+},[])
     return (
-    <div className="app">
+      <Provider store={appStore}>
+  <UserContext.Provider value={{loggedinUser : username, setUserName}} >
+  <div className="app">
       <Header/>
       <Outlet/>
     </div>
+    </UserContext.Provider>
+    </Provider>
     )
 }
 
@@ -39,6 +53,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact/>
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       },
       {
         path:"/grocery",
