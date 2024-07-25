@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "./UserContext";
 import { useSelector } from "react-redux";
+import { LOGO } from "../utils/constants";
 
 const Header = ()=>{
 
@@ -15,8 +16,9 @@ console.log(cartItems)
 
     return(
         <div className="flex justify-between bg-amber-700 p-4 mb-4">
-            <div className="px-2 ml-2">
-                <img className="w-28" src={require("./images/food-logo.png")}  />
+            <div className="px-2 ml-2 flex-col text-center">
+              <img className="w-20 rounded-full" src={LOGO}  />
+                <span className="text-white text-xl font-bold">Foodoor</span>
             </div>
             <div className="">
                 <ul className="flex items-center p-4 m-2">
